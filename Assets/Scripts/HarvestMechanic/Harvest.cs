@@ -7,6 +7,8 @@ public class Harvest : MonoBehaviour
     private AnimatorManager animatorManager;
     private MovementBlocker movementBlocker;
 
+    public bool isCloseToHarvestItem { get; set; }
+    
     public void Start()
     {
         try
@@ -24,7 +26,7 @@ public class Harvest : MonoBehaviour
     
     public void Update()
     {
-        if (playersInputs.interact)
+        if (playersInputs.interact && isCloseToHarvestItem)
             TryHarvest(1);
     }
 
