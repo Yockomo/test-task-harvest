@@ -248,6 +248,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b53079ef9907a2a40b763e78f3e2abb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentCrop: {fileID: 7842328536633691480, guid: bf399b8a5d19c174a9916c692940c185,
+    type: 3}
 --- !u!65 &1216837613
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -556,6 +558,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3656699427621543081, guid: bf399b8a5d19c174a9916c692940c185,
+        type: 3}
+      propertyPath: shakeDuration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3656699427621543081, guid: bf399b8a5d19c174a9916c692940c185,
+        type: 3}
+      propertyPath: shakeStrenght
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 3656699427621543081, guid: bf399b8a5d19c174a9916c692940c185,
+        type: 3}
+      propertyPath: shakeVibration
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7842328536633463160, guid: bf399b8a5d19c174a9916c692940c185,
         type: 3}
       propertyPath: m_RootOrder
