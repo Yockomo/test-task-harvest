@@ -1,5 +1,6 @@
 using StarterAssets;
 using UnityEngine;
+using DG.Tweening;
 
 public class Harvest : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class Harvest : MonoBehaviour
     private AnimatorManager animatorManager;
     private MovementBlocker movementBlocker;
 
-    public bool isCloseToHarvestItem { get; set; }
+    public bool isCloseToSeedBed { get; set; }
     
     public void Start()
     {
@@ -28,8 +29,8 @@ public class Harvest : MonoBehaviour
     
     public void Update()
     {
-        if (playersInputs.interact && isCloseToHarvestItem)
-            TryHarvest(1);
+        if (playersInputs.interact && isCloseToSeedBed)
+            TryHarvest(1); 
     }
 
     private void TryHarvest(int value)
@@ -39,9 +40,6 @@ public class Harvest : MonoBehaviour
         if (boolValue)
         {
             movementBlocker.StopMovement();
-            CurrentSeedBed.StartHarvestingSeed();
-            //TODO ADD DOTWEEN ANIMATION
-            transform.LookAt(CurrentSeedBed.gameObject.transform);
         }
         else
         {
@@ -49,5 +47,11 @@ public class Harvest : MonoBehaviour
         }
 
         animatorManager.Interact(boolValue);
+    }
+
+    public void StartHarvest()
+    {
+        if (CurrentSeedBed != null)
+            CurrentSeedBed.StartHarvestingSeed();
     }
 }

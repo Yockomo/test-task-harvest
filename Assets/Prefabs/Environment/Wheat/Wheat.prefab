@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemCost: 15
+  duration: 1
+  amplitude: 0.1
 --- !u!65 &4804645715944758864
 BoxCollider:
   m_ObjectHideFlags: 0
