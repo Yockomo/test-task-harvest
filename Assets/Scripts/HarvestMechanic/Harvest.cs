@@ -1,17 +1,19 @@
 using StarterAssets;
 using UnityEngine;
 using DG.Tweening;
+using System.Collections;
 
 public class Harvest : MonoBehaviour
 {
     public SeedBed CurrentSeedBed { get; set; }
+    public bool isCloseToSeedBed { get; set; }
 
     private StarterAssetsInputs playersInputs;
     private AnimatorManager animatorManager;
     private MovementBlocker movementBlocker;
+    private bool delay;
 
-    public bool isCloseToSeedBed { get; set; }
-    
+        
     public void Start()
     {
         try
@@ -29,7 +31,7 @@ public class Harvest : MonoBehaviour
     
     public void Update()
     {
-        if (playersInputs.interact && isCloseToSeedBed)
+        if (playersInputs.interact && isCloseToSeedBed && !animatorManager.GetInteract() && !delay &&CurrentSeedBed.isCropReady)
             TryHarvest(1); 
     }
 
@@ -40,18 +42,33 @@ public class Harvest : MonoBehaviour
         if (boolValue)
         {
             movementBlocker.StopMovement();
+            delay = true;
         }
         else
         {
             movementBlocker.ResetMovement();
+            StartCoroutine(Delay(0.1f));
         }
 
         animatorManager.Interact(boolValue);
     }
 
-    public void StartHarvest()
+    private IEnumerator Delay(float seconds)
     {
-        if (CurrentSeedBed != null)
+        yield return new WaitForSeconds(seconds);
+        delay = false;
+    }
+
+
+    public void HarvestSeed()
+    {
+        if (CurrentSeedBed != null && CurrentSeedBed.isCropReady)
             CurrentSeedBed.StartHarvestingSeed();
+    }
+
+    public void EndHarvest()
+    {
+        TryHarvest(0);
+        movementBlocker.ResetMovement();
     }
 }

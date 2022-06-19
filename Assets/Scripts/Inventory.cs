@@ -12,6 +12,20 @@ public class Inventory : MonoBehaviour
 
     public List<HarvestItem> harvestItems { get; set; } = new List<HarvestItem>();
 
+    private UiManager uiManager;
+
+    public void Start()
+    {
+        try
+        {
+            uiManager = GetComponent<UiManager>();
+        }
+        catch
+        {
+            Debug.Log("There is no UiManager component");
+        }
+    }
+
     public bool AddItem<T>(T item) where T : HarvestItem
     {
         if (CheckForEmptySlot() && !harvestItems.Contains(item))
@@ -19,6 +33,7 @@ public class Inventory : MonoBehaviour
             TakeCorpStack(item);
             harvestItems.Add(item);
             currentInventoryCount++;
+            UpdateUI();
             return true;
         }
 
@@ -37,9 +52,8 @@ public class Inventory : MonoBehaviour
         item.transform.DOLocalMove(Vector3.zero,timeToMove);
     }
 
-    private void TryUpdateUI()
+    private void UpdateUI()
     {
-        //if (UpdateUI != null)
-        //    UpdateUI(dimensionIndex, slotId, isUsed);
+        uiManager.UpdateWheatText(currentInventoryCount.ToString(), maxInventoryCount.ToString());
     }
 }

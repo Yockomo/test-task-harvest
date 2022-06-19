@@ -25,4 +25,9 @@ public class AnimatorManager : MonoBehaviour
     {
         playerAnimator.SetBool(interact, value);
     }
+
+    public bool GetInteract()
+    {
+        return playerAnimator.GetBool(interact);
+    }
 }

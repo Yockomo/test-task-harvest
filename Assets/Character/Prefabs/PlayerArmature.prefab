@@ -1176,6 +1176,7 @@ GameObject:
   - component: {fileID: 3438794942139927213}
   - component: {fileID: 1990695496245530503}
   - component: {fileID: 7775621112571501719}
+  - component: {fileID: 1272428819461872771}
   m_Layer: 8
   m_Name: PlayerArmature
   m_TagString: Player
@@ -1463,7 +1464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18dda3f7a23741040be43fde288a6bc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxInventoryCount: 2
+  maxInventoryCount: 40
   backpackPosition: {fileID: 4578331156332733002}
 --- !u!114 &7775621112571501719
 MonoBehaviour:
@@ -1477,6 +1478,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b44146617abe9714388b8ce19403b5d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1272428819461872771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416926081852918481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6d76d944e8b6b549a46453de6d1e4ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goldText: {fileID: 0}
+  wheatText: {fileID: 0}
 --- !u!1 &4583258754791210276
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,13 +9,13 @@ public class SeedBed : MonoBehaviour
     [SerializeField] private int defaultCorpYScale;
 
     private Harvest playerHarvest;
-    private bool isCropReady = true;
+    public bool isCropReady { get; private set; } = true;
     private bool isSeedHarvesting;
     private int countToHarvest;
 
     public void Update()
     {
-        if (isSeedHarvesting)
+        if (isSeedHarvesting && isCropReady)
             HarvestSeedBed();
     }
 
@@ -28,15 +28,17 @@ public class SeedBed : MonoBehaviour
     private IEnumerator RaiseCorp() 
     {
         ScaleCorpByY(1, 1f);
+        isCropReady = false;
         StartCoroutine(CreateCrop());
-        yield return new WaitForSeconds(timeToRaiseCrop);
-        ScaleCorpByY(defaultCorpYScale, timeToRaiseCrop);
+        yield return new WaitForSeconds(timeToRaiseCrop / 2);
+        ScaleCorpByY(defaultCorpYScale, timeToRaiseCrop/2);
+        yield return new WaitForSeconds(timeToRaiseCrop/2);
+        isCropReady = true;
         countToHarvest = 0;
     }
 
     private void ScaleCorpByY(int scaleValue, float timeToScale)
     {
-        isCropReady = !isCropReady;
         currentCrop.transform.DOScaleY(scaleValue, timeToScale);
     }
 
@@ -45,11 +47,10 @@ public class SeedBed : MonoBehaviour
         if (countToHarvest == 0)
         {
             var crop = Instantiate(currentCrop, transform.position, Quaternion.identity);
-            crop.transform.DOMove(transform.position + new Vector3(0.5f,0.5f,0.5f), 2f);
-            crop.GetComponent<Wheat>().enabled = true;
+            crop.transform.DOMove(transform.position + new Vector3(0.5f,0.5f,0.5f), 1f);
             countToHarvest++;
-            yield return new WaitForSeconds(2f);
-            crop.GetComponent<Collider>().isTrigger = true;
+            yield return new WaitForSeconds(1f);
+            crop.GetComponent<Collider>().enabled = true;
         }
     }
 
