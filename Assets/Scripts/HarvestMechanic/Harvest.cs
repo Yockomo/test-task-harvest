@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Harvest : MonoBehaviour
 {
+    public SeedBed CurrentSeedBed { get; set; }
+
     private StarterAssetsInputs playersInputs;
     private AnimatorManager animatorManager;
     private MovementBlocker movementBlocker;
@@ -35,9 +37,16 @@ public class Harvest : MonoBehaviour
         bool boolValue = value <= 0  ? false : true;
 
         if (boolValue)
+        {
             movementBlocker.StopMovement();
+            CurrentSeedBed.StartHarvestingSeed();
+            //TODO ADD DOTWEEN ANIMATION
+            transform.LookAt(CurrentSeedBed.gameObject.transform);
+        }
         else
+        {
             movementBlocker.ResetMovement();
+        }
 
         animatorManager.Interact(boolValue);
     }
