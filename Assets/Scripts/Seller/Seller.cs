@@ -25,11 +25,9 @@ public class Seller : MonoBehaviour
        foreach(var item in items)
        {
             item.transform.parent = null;
-            item.gameObject.SetActive(true);
             item.transform.DOMove(sellerPosition.position, 1f);
             goldManager.AddGold(item.ItemCost);
             yield return new WaitForSeconds(1f);
-            item.gameObject.SetActive(false);
        }
     }
 }

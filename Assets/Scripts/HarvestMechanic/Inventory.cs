@@ -12,14 +12,17 @@ public class Inventory : MonoBehaviour
 
     public List<HarvestItem> harvestItems { get; set; } = new List<HarvestItem>();
 
-    public void AddItem<T>(T item) where T : HarvestItem
+    public bool AddItem<T>(T item) where T : HarvestItem
     {
         if (CheckForEmptySlot() && !harvestItems.Contains(item))
         {
             TakeCorpStack(item);
             harvestItems.Add(item);
             currentInventoryCount++;
+            return true;
         }
+
+        return false;
     }
 
     private bool CheckForEmptySlot()
@@ -32,9 +35,6 @@ public class Inventory : MonoBehaviour
         var timeToMove = 0.5f;
         item.transform.SetParent(backpackPosition);
         item.transform.DOLocalMove(Vector3.zero,timeToMove);
-        
-        if(currentInventoryCount > 1)
-            item.gameObject.SetActive(false);
     }
 
     private void TryUpdateUI()

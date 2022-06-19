@@ -46,6 +46,7 @@ public class SeedBed : MonoBehaviour
         {
             var crop = Instantiate(currentCrop, transform.position, Quaternion.identity);
             crop.transform.DOMove(transform.position + new Vector3(0.5f,0.5f,0.5f), 2f);
+            crop.GetComponent<Wheat>().enabled = true;
             countToHarvest++;
             yield return new WaitForSeconds(2f);
             crop.GetComponent<Collider>().isTrigger = true;

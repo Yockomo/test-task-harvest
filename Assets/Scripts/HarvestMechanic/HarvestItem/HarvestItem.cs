@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public abstract class HarvestItem : MonoBehaviour
@@ -10,7 +11,8 @@ public abstract class HarvestItem : MonoBehaviour
     {
         if (other.TryGetComponent<Inventory>(out Inventory inventory))
         {
-            inventory.AddItem(this);
+            if(inventory.AddItem(this))
+                transform.DOShakeScale(3f, 5f).SetLoops(-1);
         }
     }
 }
