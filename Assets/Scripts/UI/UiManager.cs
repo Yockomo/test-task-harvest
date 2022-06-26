@@ -13,24 +13,33 @@ public class UiManager : MonoBehaviour
 
     private float currentGold;
     private Vector3 defaultScale;
+    
+    private void Start()
+    {
+        defaultScale = goldIcon.transform.localScale;
+        Debug.Log(goldIcon.transform.localScale);
+    }
 
     public void UpdateGoldUi(float currentGold, float amount)
     {
         this.currentGold = currentGold;
         StartCoroutine(TextAnimation(amount));
+        if (goldIcon.transform.localScale != defaultScale)
+        {
+            Debug.Log("Icon scale");
+            goldIcon.transform.localScale = defaultScale;
+        }
     }
 
     private IEnumerator TextAnimation(float amount)
     {
-        defaultScale = goldIcon.transform.localScale;
-        goldIcon.transform.DOShakeScale(amount*textChangeTime);
+        goldIcon.transform.DOShakeScale((amount*textChangeTime)/2);
         for(int i=0; i<amount; i++)
         {
             currentGold++;
             goldText.text = currentGold.ToString();
             yield return new WaitForSeconds(textChangeTime);
         }
-        goldIcon.transform.localScale = defaultScale;
     }
 
     public void UpdateWheatText(string currentStacks, string maxStacks)
