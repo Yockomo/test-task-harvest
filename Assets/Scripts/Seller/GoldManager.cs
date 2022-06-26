@@ -22,13 +22,13 @@ public class GoldManager : MonoBehaviour
 
     public void AddGold(float amount)
     {
+        uiManager.UpdateGoldUi(CurrentGold,amount);
         CurrentGold += amount;
-        uiManager.UpdateGoldUi(CurrentGold.ToString());
     }
 
     public void TakeGold(float amount)
     {
+        uiManager.UpdateGoldUi(CurrentGold,amount);
         CurrentGold -= amount;
-        uiManager.UpdateGoldUi(CurrentGold.ToString());
     }
 }

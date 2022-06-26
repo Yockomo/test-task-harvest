@@ -13,11 +13,13 @@ public class Seller : MonoBehaviour
     public virtual void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<Inventory>(out Inventory inventory))
-        { 
-            goldManager = other.GetComponent<GoldManager>();
-            uiManager = other.GetComponent<UiManager>();
-            playerInventory = inventory;
-
+        {
+            if (playerInventory == null)
+            {
+                goldManager = other.GetComponent<GoldManager>();
+                uiManager = other.GetComponent<UiManager>();
+                playerInventory = inventory;
+            }
             StartCoroutine(SellItems(playerInventory.harvestItems));
             inventory.harvestItems = new List<HarvestItem>();
             inventory.currentInventoryCount = 0;

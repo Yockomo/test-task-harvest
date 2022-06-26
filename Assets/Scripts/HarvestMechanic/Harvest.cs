@@ -1,6 +1,5 @@
 using StarterAssets;
 using UnityEngine;
-using DG.Tweening;
 using System.Collections;
 
 public class Harvest : MonoBehaviour
@@ -12,8 +11,9 @@ public class Harvest : MonoBehaviour
     private AnimatorManager animatorManager;
     private MovementBlocker movementBlocker;
     private bool delay;
+    [SerializeField] private GameObject scythe;
 
-        
+
     public void Start()
     {
         try
@@ -42,11 +42,13 @@ public class Harvest : MonoBehaviour
         if (boolValue)
         {
             movementBlocker.StopMovement();
+            scythe.SetActive(true);
             delay = true;
         }
         else
         {
             movementBlocker.ResetMovement();
+            scythe.SetActive(false);
             StartCoroutine(Delay(0.1f));
         }
 
