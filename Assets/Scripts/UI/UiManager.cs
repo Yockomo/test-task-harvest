@@ -12,6 +12,7 @@ public class UiManager : MonoBehaviour
     [SerializeField, Range(0f,1f)] private float textChangeTime;
 
     private float currentGold;
+    private Vector3 defaultScale;
 
     public void UpdateGoldUi(float currentGold, float amount)
     {
@@ -21,6 +22,7 @@ public class UiManager : MonoBehaviour
 
     private IEnumerator TextAnimation(float amount)
     {
+        defaultScale = goldIcon.transform.localScale;
         goldIcon.transform.DOShakeScale(amount*textChangeTime);
         for(int i=0; i<amount; i++)
         {
@@ -28,6 +30,7 @@ public class UiManager : MonoBehaviour
             goldText.text = currentGold.ToString();
             yield return new WaitForSeconds(textChangeTime);
         }
+        goldIcon.transform.localScale = defaultScale;
     }
 
     public void UpdateWheatText(string currentStacks, string maxStacks)

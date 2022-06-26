@@ -7,12 +7,12 @@ public class Harvest : MonoBehaviour
     public SeedBed CurrentSeedBed { get; set; }
     public bool isCloseToSeedBed { get; set; }
 
+    [SerializeField] private GameObject scythe;
+
     private StarterAssetsInputs playersInputs;
     private AnimatorManager animatorManager;
     private MovementBlocker movementBlocker;
     private bool delay;
-    [SerializeField] private GameObject scythe;
-
 
     public void Start()
     {
@@ -31,8 +31,8 @@ public class Harvest : MonoBehaviour
     
     public void Update()
     {
-        if (playersInputs.interact && isCloseToSeedBed && !animatorManager.GetInteract() && !delay &&CurrentSeedBed.isCropReady)
-            TryHarvest(1); 
+        if (playersInputs.interact && isCloseToSeedBed && !animatorManager.GetInteract() && !delay && CurrentSeedBed.isCropReady)
+            TryHarvest(1);
     }
 
     private void TryHarvest(int value)
